@@ -21,4 +21,4 @@ jobs:
       # To-do: Caching dependencies
       
       - name: 🛠 Running unit test
-        run: yarn run test
+        run: yarn run test:unit
