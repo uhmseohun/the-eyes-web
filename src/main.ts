@@ -61,13 +61,13 @@ Vue.use(VueAnalytics, {
 const requireComponent = require.context(
   './totoro/components',
   false,
-  /Toto[A-Z]\w+\.vue$/,
+  /[A-Z]\w+\.vue$/,
 );
 
 requireComponent.keys().forEach((filename: string) => {
   const componentConfig = requireComponent(filename);
   const componentName = camelCase(
-    filename.split('/')[1].replace(/\.\w+$/, ''),
+    `Toto${filename.split('/')[1].replace(/\.\w+$/, '')}`,
   );
 
   Vue.component(
