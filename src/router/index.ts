@@ -69,6 +69,7 @@ const routes: Array<RouteConfig> = [
     meta: {
       title: '지금 게임 중!',
     },
+    component: () => import(/* webpackChunkName: "game" */ '@/views/Game.vue'),
     beforeEnter: (to, _, next) => {
       if (!store.getters.isRoomInitialized) {
         next({ path: '/' });

@@ -11,6 +11,7 @@ import {
   SWAL_OPTIONS,
   GOOGLE_TRACKING_ID,
   KAKAO_SDK_KEY,
+  VISION_SERVER_URL,
 } from '@/constants';
 import axios from 'axios';
 import socket from 'socket.io-client';
@@ -40,6 +41,9 @@ Vue.config.errorHandler = (err) => {
 Vue.prototype.$io = socket(SOCKET_IO_URL);
 Vue.prototype.$api = axios.create({
   baseURL: BACKEND_API_URL,
+});
+Vue.prototype.$vision = axios.create({
+  baseURL: VISION_SERVER_URL,
 });
 KakaoSDK.init(KAKAO_SDK_KEY);
 Vue.prototype.$kakao = KakaoSDK;
