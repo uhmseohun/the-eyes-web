@@ -101,7 +101,9 @@ export default class CreateGame extends Vue {
           <kakao-send-button @click="shareByKakao"/>
         </div>
       </div>
-      <p>위에 있는 QR 코드를 친구에게 보여 주거나 카카오톡으로 전송하세요.</p>
+      <p v-show="isGenerated">
+        위에 있는 QR 코드를 친구에게 보여 주거나 카카오톡으로 전송하세요.
+      </p>
     </template>
   </service-wrapper>
 </template>
