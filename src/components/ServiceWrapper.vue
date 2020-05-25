@@ -35,7 +35,7 @@ export default class ServiceWrapper extends Vue {
 }
 
 .content {
-  width: 30vw;
+  width: 33%;
   min-height: 60vh;
 }
 
