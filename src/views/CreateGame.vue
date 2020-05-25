@@ -3,7 +3,6 @@ import { Vue, Component } from 'vue-property-decorator';
 import { WEBAPP_URL, QRCODE_API_URI } from '@/constants';
 import KakaoSendButton from '@/components/KakaoSendButton.vue';
 import ServiceWrapper from '@/components/ServiceWrapper.vue';
-import store from '@/store';
 
 @Component({
   components: {
@@ -26,14 +25,14 @@ export default class CreateGame extends Vue {
     return `${WEBAPP_URL}/join-game/${this.roomKey}`;
   }
 
-  get generated() {
-    return this.roomKey !== null && !this.pending;
+  get isGenerated() {
+    return this.$store.getters.isRoomInitialized;
   }
 
   async onClickCreation() {
     this.pending = true;
 
-    this.roomKey = await store.dispatch('createRoom', this.roomName);
+    this.roomKey = await this.$store.dispatch('createRoom', this.roomName);
 
     const qrImage = new Image();
     qrImage.src = this.qrCodeURL;
@@ -95,8 +94,8 @@ export default class CreateGame extends Vue {
           생성하기
         </toto-button>
       </div>
-
-      <div v-if="generated" class="form__item">
+      {{ isInitialized }}
+      <div v-if="isGenerated" class="form__item">
         <div class="share-options">
           <img class="qr-code" :src="qrCodeURL">
           <kakao-send-button @click="shareByKakao"/>
