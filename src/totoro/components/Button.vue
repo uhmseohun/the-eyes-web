@@ -40,6 +40,7 @@ export default class Button extends Vue {
   border: 0;
   border-bottom: 1px solid #000000;
   font-size: 1.3rem;
+  background-color: #ffffff;
   transition: color 0.3s;
   transition: border-bottom 0.3s;
   cursor: pointer;
