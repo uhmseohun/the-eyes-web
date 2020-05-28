@@ -1,20 +1,26 @@
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 import ServiceTitle from '@/components/ServiceTitle.vue';
 
 @Component({
   components: { ServiceTitle },
+  computed: {
+    serviceTitle() {
+      return this.$route.meta.title;
+    },
+    illustName() {
+      return this.$route.meta.illust || 'default.svg';
+    },
+  },
 })
-export default class ServiceWrapper extends Vue {
-  @Prop({ default: 'default.svg' }) private illust!: string;
-}
+export default class ServiceWrapper extends Vue {}
 </script>
 
 <template>
   <div class="container">
     <div class="content">
       <service-title>
-        <slot name="title" />
+        {{ serviceTitle }}
       </service-title>
 
       <slot name="content" />
@@ -22,7 +28,7 @@ export default class ServiceWrapper extends Vue {
 
     <img
       class="illust"
-      :src="require(`@/assets/illusts/${this.illust}`)"
+      :src="require(`@/assets/illusts/${this.illustName}`)"
     >
   </div>
 </template>

@@ -24,7 +24,8 @@ const routes: Array<RouteConfig> = [
     name: 'CreateGame',
     component: () => import(/* webpackChunkName: "createGame" */ '@/views/CreateGame.vue'),
     meta: {
-      title: '새로운 게임 생성하기',
+      title: '🖼 새로운 게임 생성하기',
+      illust: 'create-game.svg',
     },
   },
   {
@@ -32,7 +33,8 @@ const routes: Array<RouteConfig> = [
     name: 'Leaderboard',
     component: Leaderboard,
     meta: {
-      title: '리더보드 조화하기',
+      title: '🏆 리더보드 조회하기',
+      illust: 'leaderboard.svg',
     },
   },
   {
@@ -40,7 +42,7 @@ const routes: Array<RouteConfig> = [
     name: 'About',
     component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
     meta: {
-      title: '눈싸움에 대하여',
+      title: '📄 눈싸움에 대하여',
     },
   },
   {
@@ -67,7 +69,7 @@ const routes: Array<RouteConfig> = [
     path: '/game',
     name: 'Game',
     meta: {
-      title: '지금 게임 중!',
+      title: '🎮 지금 게임 중!',
     },
     component: () => import(/* webpackChunkName: "game" */ '@/views/Game.vue'),
     beforeEnter: (to, _, next) => {

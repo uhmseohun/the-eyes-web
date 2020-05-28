@@ -74,11 +74,7 @@ export default class CreateGame extends Vue {
 </script>
 
 <template>
-  <service-wrapper illust="create-game.svg" >
-    <template v-slot:title>
-      🖼 새로운 게임 생성하기
-    </template>
-
+  <service-wrapper>
     <template v-slot:content>
       <div class="form__item">
         <toto-input
