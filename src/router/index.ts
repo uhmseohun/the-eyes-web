@@ -113,7 +113,6 @@ router.onError(async (err) => {
     title: '에러!',
     text: err.message,
     icon: 'error',
-    position: 'top-end',
     ...SWAL_OPTIONS,
   });
 });
