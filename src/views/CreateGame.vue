@@ -26,7 +26,7 @@ export default class CreateGame extends Vue {
   }
 
   get isGenerated() {
-    return this.$store.getters.isRoomInitialized;
+    return this.$store.getters.isRoomInitialized && !this.pending;
   }
 
   async onClickCreation() {
@@ -90,7 +90,6 @@ export default class CreateGame extends Vue {
           생성하기
         </toto-button>
       </div>
-      {{ isInitialized }}
       <div v-if="isGenerated" class="form__item">
         <div class="share-options">
           <img class="qr-code" :src="qrCodeURL">
