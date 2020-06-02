@@ -6,7 +6,6 @@ import { SWAL_OPTIONS } from '@/constants';
 import store from '@/store';
 
 import Main from '@/views/Main.vue';
-import Leaderboard from '@/views/Leaderboard.vue';
 
 Vue.use(VueRouter);
 
@@ -22,7 +21,11 @@ const routes: Array<RouteConfig> = [
   {
     path: '/create-game',
     name: 'CreateGame',
-    component: () => import(/* webpackChunkName: "createGame" */ '@/views/CreateGame.vue'),
+    component: () => import(
+      /* webpackChunkName: "createGame" */
+      // eslint-disable-next-line
+      '@/views/CreateGame.vue'
+    ),
     meta: {
       title: '🖼 새로운 게임 생성하기',
       illust: 'create-game.svg',
@@ -31,7 +34,11 @@ const routes: Array<RouteConfig> = [
   {
     path: '/leaderboard',
     name: 'Leaderboard',
-    component: Leaderboard,
+    component: () => import(
+      /* webpackChunkName: "leaderboard" */
+      // eslint-disable-next-line
+      '@/views/Leaderboard.vue'
+    ),
     meta: {
       title: '🏆 리더보드 조회하기',
       illust: 'leaderboard.svg',
@@ -40,7 +47,11 @@ const routes: Array<RouteConfig> = [
   {
     path: '/about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
+    component: () => import(
+      /* webpackChunkName: "about" */
+      // eslint-disable-next-line
+      '@/views/About.vue'
+    ),
     meta: {
       title: '📄 눈싸움에 대하여',
     },
@@ -71,7 +82,11 @@ const routes: Array<RouteConfig> = [
     meta: {
       title: '🎮 지금 게임 중!',
     },
-    component: () => import(/* webpackChunkName: "game" */ '@/views/Game.vue'),
+    component: () => import(
+      /* webpackChunkName: "game" */
+      // eslint-disable-next-line
+      '@/views/Game.vue'
+    ),
     beforeEnter: (to, _, next) => {
       if (!store.getters.isRoomInitialized) {
         next({ path: '/' });
@@ -82,9 +97,32 @@ const routes: Array<RouteConfig> = [
     },
   },
   {
+    path: '/game/finished',
+    name: 'GameFinished',
+    meta: {
+      title: '😭 게임 끝 !',
+    },
+    component: () => import(
+      /* webpackChunkName: "gameFinished" */
+      // eslint-disable-next-line
+      '@/views/GameFinished.vue'
+    ),
+    beforeEnter: (to, _, next) => {
+      if (!to.params.playedTime) {
+        next({ path: '/' });
+        throw new Error('잘못된 접근입니다. 메인 페이지로 돌아갑니다.');
+      }
+      next();
+    },
+  },
+  {
     path: '*',
     name: '404Error',
-    component: () => import(/* webpackChunkName: "errorPage" */ '@/views/404.vue'),
+    component: () => import(
+      /* webpackChunkName: "errorPage" */
+      // eslint-disable-next-line
+      '@/views/404.vue'
+    ),
     meta: {
       title: '페이지를 찾을 수 없습니다',
     },
