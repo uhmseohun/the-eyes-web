@@ -25,4 +25,10 @@ export default {
     $io.emit('joinRoom', roomKey);
     commit('setRoomKey', roomKey);
   },
+
+  leaveRoom: async ({ commit }: ActionContext<State, State>) => {
+    const { $io } = Vue.prototype;
+    $io.emit('leaveRoom');
+    commit('setRoomKey', null);
+  },
 };
