@@ -107,13 +107,6 @@ const routes: Array<RouteConfig> = [
       // eslint-disable-next-line
       '@/views/GameFinished.vue'
     ),
-    beforeEnter: (to, _, next) => {
-      if (!to.params.playedTime) {
-        next({ path: '/' });
-        throw new Error('잘못된 접근입니다. 메인 페이지로 돌아갑니다.');
-      }
-      next();
-    },
   },
   {
     path: '*',
