@@ -23,7 +23,7 @@ export default class Main extends Vue {}
 
 <style lang="scss" scoped>
 .brand {
-  margin-top: 100px;
+  padding-top: 100px;
 
   &__title {
     &-1,
