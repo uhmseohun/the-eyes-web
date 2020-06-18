@@ -42,7 +42,7 @@ export default class CreateGame extends Vue {
 
     const { $io } = Vue.prototype;
     $io.on('newUser', () => {
-      this.$router.push({ path: '/game' });
+      this.$router.push({ name: 'Game' });
     });
   }
 
