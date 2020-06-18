@@ -22,7 +22,7 @@ const routes: Array<RouteConfig> = [
     path: '/create-game',
     name: 'CreateGame',
     component: () => import(
-      /* webpackChunkName: "createGame" */
+      /* webpackChunkName: "CreateGame" */
       // eslint-disable-next-line
       '@/views/CreateGame.vue'
     ),
@@ -35,7 +35,7 @@ const routes: Array<RouteConfig> = [
     path: '/leaderboard',
     name: 'Leaderboard',
     component: () => import(
-      /* webpackChunkName: "leaderboard" */
+      /* webpackChunkName: "Leaderboard" */
       // eslint-disable-next-line
       '@/views/Leaderboard.vue'
     ),
@@ -48,7 +48,7 @@ const routes: Array<RouteConfig> = [
     path: '/about',
     name: 'About',
     component: () => import(
-      /* webpackChunkName: "about" */
+      /* webpackChunkName: "About" */
       // eslint-disable-next-line
       '@/views/About.vue'
     ),
@@ -83,7 +83,7 @@ const routes: Array<RouteConfig> = [
       title: '🎮 지금 게임 중!',
     },
     component: () => import(
-      /* webpackChunkName: "game" */
+      /* webpackChunkName: "Game" */
       // eslint-disable-next-line
       '@/views/Game.vue'
     ),
@@ -103,7 +103,7 @@ const routes: Array<RouteConfig> = [
       title: '😭 게임 끝 !',
     },
     component: () => import(
-      /* webpackChunkName: "gameFinished" */
+      /* webpackChunkName: "GameFinished" */
       // eslint-disable-next-line
       '@/views/GameFinished.vue'
     ),
@@ -112,7 +112,7 @@ const routes: Array<RouteConfig> = [
     path: '*',
     name: '404Error',
     component: () => import(
-      /* webpackChunkName: "errorPage" */
+      /* webpackChunkName: "ErrorPage" */
       // eslint-disable-next-line
       '@/views/404.vue'
     ),
