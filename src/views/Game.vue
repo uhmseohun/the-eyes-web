@@ -53,7 +53,7 @@ export default class Game extends Vue {
 
     this.$store.dispatch('leaveRoom');
     this.$router.push({
-      path: '/game/finished',
+      name: 'GameFinished',
       params: {
         playedTime: this.playingTime,
       },
