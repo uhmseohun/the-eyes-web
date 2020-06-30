@@ -93,7 +93,9 @@ export default class CreateGame extends Vue {
       <div v-if="isGenerated" class="form__item">
         <div class="share-options">
           <img class="qr-code" :src="qrCodeURL">
-          <kakao-send-button @click="shareByKakao"/>
+          <kakao-send-button @click="shareByKakao">
+            카카오톡으로 공유하기
+          </kakao-send-button>
         </div>
       </div>
       <p v-show="isGenerated">

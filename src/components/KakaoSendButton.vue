@@ -18,7 +18,7 @@ export default class KakaoSendButton extends Vue {
       class="button__logo"
       src="@/assets/etcs/kakao-icon.png"
     >
-    카카오톡으로 전송하기
+    <slot />
   </button>
 </template>
 
