@@ -9,7 +9,7 @@ import { RecordRTCPromisesHandler } from 'recordrtc';
     filterTime(value: number) {
       const minutes = String(Math.floor(value / 60)).padStart(2, '0');
       const seconds = String(value % 60).padStart(2, '0');
-      return `${minutes}:${seconds}`;
+      return `${minutes}분 ${seconds}초`;
     },
   },
 })
@@ -25,6 +25,19 @@ export default class Game extends Vue {
   startTime!: number = new Date().getTime();
 
   playingTime = 0;
+
+  async emitClosed() {
+    const { $io } = Vue.prototype;
+    $io.emit('eyeClosed', this.playingTime);
+
+    this.$store.dispatch('leaveRoom');
+    this.$router.push({
+      name: 'GameFinished',
+      params: {
+        playedTime: this.playingTime,
+      },
+    });
+  }
 
   async created() {
     this.stream = await navigator.mediaDevices.getUserMedia({
@@ -48,16 +61,7 @@ export default class Game extends Vue {
     // eslint-disable-next-line
     while (!await this.isEyeclosed());
 
-    const { $io } = Vue.prototype;
-    $io.emit('eyeClosed', this.playingTime);
-
-    this.$store.dispatch('leaveRoom');
-    this.$router.push({
-      name: 'GameFinished',
-      params: {
-        playedTime: this.playingTime,
-      },
-    });
+    await this.emitClosed();
   }
 
   async isEyeclosed() {
@@ -89,6 +93,12 @@ export default class Game extends Vue {
         <h1 class="title">지금 플레이 중</h1>
         <h2 class="timer">⏰ {{ playingTime | filterTime }}</h2>
       </div>
+      <toto-button
+        class="button-giveup"
+        @click="emitClosed"
+      >
+        포기하기
+      </toto-button>
     </div>
   </div>
 </template>
@@ -105,20 +115,25 @@ export default class Game extends Vue {
   min-height: 550px;
   display: unset;
 
-  &__left {}
-  &__right {}
+  &-left {}
+  &-right {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
-.title, .timer {
-  display: inline;
-}
 .title {
   margin-right: 15px;
 }
 
 .webcam {
-  display: none;
   width: 550px;
   height: 550px;
+}
+
+.button {
+  &-giveup {
+    margin-top: auto;
+  }
 }
 </style>
