@@ -40,4 +40,3 @@ export default class GameFinished extends Vue {}
 </template>
 
 <style lang="scss" scoped>
-</style>

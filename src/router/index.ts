@@ -54,6 +54,7 @@ const routes: Array<RouteConfig> = [
     ),
     meta: {
       title: '📄 눈싸움에 대하여',
+      illust: 'about.svg',
     },
   },
   {
