@@ -29,6 +29,7 @@ import KakaoSDK from './kakao.min';
 
 Vue.config.productionTip = false;
 Vue.config.errorHandler = (err) => {
+  console.error(err);
   Sweetalert2.fire({
     title: '에러!',
     text: err.message,

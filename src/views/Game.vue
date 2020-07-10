@@ -12,6 +12,12 @@ import { RecordRTCPromisesHandler } from 'recordrtc';
       return `${minutes}분 ${seconds}초`;
     },
   },
+  computed: {
+    roomName() {
+      const { roomKey } = this.$store.state;
+      return roomKey.substring(0, roomKey.length - 13);
+    },
+  },
 })
 export default class Game extends Vue {
   stream!: any;
@@ -22,11 +28,13 @@ export default class Game extends Vue {
 
   contentType = ({ _boundary: b }: any) => `multipart/form-data; boundary=${b}`;
 
-  startTime!: number = new Date().getTime();
+  startTime: number;
 
   playingTime = 0;
 
-  async emitClosed() {
+  counterpartTime: number = undefined;
+
+  async emitClosed(isGiveup: boolean) {
     const { $io } = Vue.prototype;
     $io.emit('eyeClosed', this.playingTime);
 
@@ -34,7 +42,9 @@ export default class Game extends Vue {
     this.$router.push({
       name: 'GameFinished',
       params: {
-        playedTime: this.playingTime,
+        me: this.playingTime,
+        counterpart: this.counterpartTime,
+        giveUp: isGiveup,
       },
     });
   }
@@ -51,6 +61,8 @@ export default class Game extends Vue {
       type: 'video',
     });
 
+    this.startTime = new Date().getTime();
+
     setInterval(() => {
       const currentTime = new Date().getTime();
       this.playingTime = Math.floor((currentTime - this.startTime) / 1000);
@@ -58,10 +70,20 @@ export default class Game extends Vue {
 
     await this.sleep(2000);
 
-    // eslint-disable-next-line
-    while (!await this.isEyeclosed());
+    const { $io } = Vue.prototype;
+    $io.on('eyeClosed', (data) => {
+      this.counterpartTime = data;
+    });
 
-    await this.emitClosed();
+    try {
+      // eslint-disable-next-line
+      while (!await this.isEyeclosed());
+    } catch (error) {
+      await this.emitClosed(false);
+      throw new Error(error.message);
+    }
+
+    await this.emitClosed(false);
   }
 
   async isEyeclosed() {
@@ -90,12 +112,12 @@ export default class Game extends Vue {
     </div>
     <div class="section section-right">
       <div class="header">
-        <h1 class="title">지금 플레이 중</h1>
+        <h1 class="title">{{ roomName }}에서 게임 플레이 중</h1>
         <h2 class="timer">⏰ {{ playingTime | filterTime }}</h2>
       </div>
       <toto-button
         class="button-giveup"
-        @click="emitClosed"
+        @click="emitClosed(true)"
       >
         포기하기
       </toto-button>
