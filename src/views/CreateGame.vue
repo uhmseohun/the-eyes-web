@@ -53,7 +53,7 @@ export default class CreateGame extends Vue {
       content: {
         title: '친구가 눈싸움 게임에 초대했어요!',
         description: '지금 접속하세요',
-        imageUrl: WEBAPP_URL, // TEMP
+        imageUrl: `${WEBAPP_URL}/apple-icon-144x144.png`,
         link: {
           webUrl: WEBAPP_URL,
           mobileWebUrl: WEBAPP_URL,
