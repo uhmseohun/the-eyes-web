@@ -12,12 +12,6 @@ import { RecordRTCPromisesHandler } from 'recordrtc';
       return `${minutes}분 ${seconds}초`;
     },
   },
-  computed: {
-    roomName() {
-      const { roomKey } = this.$store.state;
-      return roomKey.substring(0, roomKey.length - 13);
-    },
-  },
 })
 export default class Game extends Vue {
   stream!: any;
@@ -112,7 +106,7 @@ export default class Game extends Vue {
     </div>
     <div class="section section-right">
       <div class="header">
-        <h1 class="title">{{ roomName }}에서 게임 플레이 중</h1>
+        <h1 class="title">지금 게임 플레이 중</h1>
         <h2 class="timer">⏰ {{ playingTime | filterTime }}</h2>
       </div>
       <toto-button
