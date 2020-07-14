@@ -9,22 +9,9 @@ import { WEBAPP_URL } from '@/constants';
     myTime() {
       return this.$route.params.me;
     },
-    counterpartTime() {
-      return this.$route.params.counterpart;
-    },
     isGiveUp() {
       return this.$route.params.giveUp;
     },
-  },
-  created() {
-    if (!this.$route.params.me) {
-      this.$router.push({ name: 'Main' });
-      throw new Error('잘못된 접근입니다. 메인 페이지로 돌아갑니다.');
-    }
-    const { $io } = Vue.prototype;
-    $io.on('eyeClosed', (data: number) => {
-      this.$route.params.counterpart = String(data);
-    });
   },
   filters: {
     filterTime(value: number) {
@@ -39,9 +26,9 @@ import { WEBAPP_URL } from '@/constants';
       $kakao.Link.sendDefault({
         objectType: 'feed',
         content: {
-          title: 'ㅋㅋ1',
-          description: 'ㅋㅋ2',
-          imageUrl: WEBAPP_URL, // TEMP
+          title: '방금 눈싸움 게임을 끝냈어요!',
+          description: '지금 접속해 보세요',
+          imageUrl: `${WEBAPP_URL}/apple-icon-144x144.png`,
           link: {
             webUrl: WEBAPP_URL,
             mobileWebUrl: WEBAPP_URL,
@@ -49,7 +36,7 @@ import { WEBAPP_URL } from '@/constants';
         },
         buttons: [
           {
-            title: '접속하기',
+            title: '게임 해 보기',
             link: {
               webUrl: WEBAPP_URL,
               mobileWebUrl: WEBAPP_URL,
@@ -60,7 +47,21 @@ import { WEBAPP_URL } from '@/constants';
     },
   },
 })
-export default class GameFinished extends Vue {}
+export default class GameFinished extends Vue {
+  counterpartTime!: string;
+
+  created() {
+    if (!this.$route.params.me) {
+      this.$router.push({ name: 'Main' });
+      throw new Error('잘못된 접근입니다. 메인 페이지로 돌아갑니다.');
+    }
+    this.counterpartTime = this.$route.params.counterpart;
+    const { $io } = Vue.prototype;
+    $io.on('eyeClosed', (data: number) => {
+      this.counterpartTime = String(data);
+    });
+  }
+}
 </script>
 
 <template>
