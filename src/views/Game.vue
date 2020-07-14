@@ -80,7 +80,7 @@ export default class Game extends Vue {
       while (!await this.isEyeclosed());
     } catch (error) {
       await this.emitClosed(false);
-      throw new Error(error.message);
+      throw new Error('마스크나 기타 액세서리를 착용하고 있어 얼굴을 검출할 수 없습니다.');
     }
 
     await this.emitClosed(false);
