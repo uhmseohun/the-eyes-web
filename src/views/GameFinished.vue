@@ -27,7 +27,7 @@ import { WEBAPP_URL } from '@/constants';
         objectType: 'feed',
         content: {
           title: '방금 눈싸움 게임을 끝냈어요!',
-          description: '지금 접속해 보세요',
+          description: `눈 뜨고 ${this.$route.params.me}초나 버텼어요`,
           imageUrl: `${WEBAPP_URL}/apple-icon-144x144.png`,
           link: {
             webUrl: WEBAPP_URL,
