@@ -11,7 +11,7 @@
   "dependencies": {
     "@types/lodash": "^4.14.152",
     "@types/socket.io-client": "^1.4.33",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.4",
     "csstype": "^2.6.10",
     "lodash": "^4.17.15",
